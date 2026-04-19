@@ -21,7 +21,28 @@ public class Caixa
         Cor = cor;
         DiasDeEmprestimo = diasDeEmprestimo;
     }
-    
+
+    public string[] Validar()
+    {
+        string erros = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(Equiqueta))
+        {
+            erros += "O campo \"Etiqueta\" é obrigatório;";
+        }
+
+        else if (Equiqueta.Length > 50)
+        {
+            erros += "O campo \"Etiqueta\" deve conter no máximo 50 caracteres;";
+        }
+
+        if (DiasDeEmprestimo < 1)
+        {
+            erros += "O campo \"Dias de Empréstimo\" deve conter um valor maior que 0;";
+        }
+
+        return erros.Split(';', StringSplitOptions.RemoveEmptyEntries); // separar
+    }
     public void AtualizarRegistro(Caixa caixaAtualizada)
     {
         Equiqueta = caixaAtualizada.Equiqueta;

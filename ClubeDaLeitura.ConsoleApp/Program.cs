@@ -3,8 +3,10 @@ using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+RepositorioRevista repositorioRevista = new RepositorioRevista();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
+TelaRevista telaRevista = new TelaRevista(repositorioCaixa, repositorioRevista);
 
 while (true)
 {
@@ -66,7 +68,35 @@ while (true)
 
         else if (opcaoMenuPrincipal == "2")
         {
+            opcaoMenuInterno = telaRevista.ObterEscolhaMenuInterno();
 
+            if (opcaoMenuInterno == "S")
+            {
+                Console.Clear();
+                break;
+            }
+            if (opcaoMenuInterno == "1")
+            {
+                telaRevista.Cadastrar();
+                break;
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaRevista.Editar();
+                break;
+            }
+
+            else if (opcaoMenuInterno == "3")
+            {
+                telaRevista.Excluir();
+                break;
+            }
+
+            else if (opcaoMenuInterno == "4")
+            {
+                telaRevista.VisualizarTodos(deveExibirCabecalho: true);
+                break;
+            }
         }
 
         else if (opcaoMenuPrincipal == "3")

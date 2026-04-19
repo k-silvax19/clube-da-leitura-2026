@@ -34,26 +34,46 @@ public class TelaCaixa
 
     public void Cadastrar()
     {
-        ExibirCabecalho("Cadastrar Caixa");
+        ExibirCabecalho("Cadastro de Caixa");
 
         Caixa novaCaixa = ObterDadosCastrais();
 
+        string[] erros = novaCaixa.Validar();
+
+        if (erros.Length > 0)
+        {
+            Console.WriteLine("---------------------------------");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            for (int i = 0; i < erros.Length; i++)
+            {
+                string erro = erros[i];
+
+                Console.WriteLine(erro);
+            }
+
+            Console.ResetColor();
+            Console.WriteLine("---------------------------------");
+            Console.Write("Digite ENTER para continuar...");
+            Console.ReadLine();
+
+            Cadastrar();
+            return;
+        }
+
         repositorioCaixa.Cadastrar(novaCaixa);
 
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"O registro de \"{novaCaixa.Id}\" foi cadastrado com sucesso.");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar...");
-        Console.ReadLine();
-
+        ExibirMensagem($"O registro \"{novaCaixa.Id}\" foi cadastrado com sucesso!");
     }
+
 
     public void Editar()
     {
         ExibirCabecalho("Edição de caixa");
 
         VisualizarTodos(deveExbirCabecalho: false);
-        
+
         string? idSelecionado;
 
         do
@@ -68,6 +88,27 @@ public class TelaCaixa
         Console.WriteLine("---------------------------------");
 
         Caixa novaCaixa = ObterDadosCastrais();
+
+        string[] erros = novaCaixa.Validar();
+
+        if (erros.Length < 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            for (int i = 0; i < erros.Length; i++)
+            {
+                Console.ResetColor();
+
+                string erro = erros[i];
+
+                Console.WriteLine(erro);
+            }
+            Console.ResetColor();
+
+            Editar();
+            return;
+
+        }
 
         bool conseguiuEditar = repositorioCaixa.Editar(idSelecionado, novaCaixa);
 
@@ -136,8 +177,6 @@ public class TelaCaixa
         if (deveExbirCabecalho)
             Console.WriteLine("Digite ENTER para continuar...");
         Console.ReadLine();
-
-
     }
 
     public void ExibirCabecalho(string nome)
@@ -152,7 +191,7 @@ public class TelaCaixa
 
     private Caixa ObterDadosCastrais()
     {
-        Console.Write("Informe a etiqueta da caixa");
+        Console.Write("Informe a etiqueta da caixa: ");
         string? etiqueta = Console.ReadLine();
 
         Console.WriteLine("---------------------------------");
