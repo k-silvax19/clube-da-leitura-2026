@@ -5,8 +5,20 @@ using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 
+Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
+repositorioCaixa.Cadastrar(caixa);
+
+Revista revista = new Revista("Naruto", 10, 2009, caixa);
+repositorioRevista.Cadastrar(revista);
+
+repositorioCaixa.Cadastrar(caixa);
+
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 TelaRevista telaRevista = new TelaRevista(repositorioCaixa, repositorioRevista);
+
+EntidadeBase entidade = caixa;
+
+entidade.AtualizarRegistro(new Caixa("Teste", "Azul", 4));
 
 while (true)
 {
