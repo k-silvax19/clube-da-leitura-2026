@@ -1,7 +1,5 @@
-using System;
-using System.Reflection.PortableExecutable;
-using System.Runtime.CompilerServices;
 using ClubeDaLeitura.ConsoleApp.Dominio;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Aprensacao;

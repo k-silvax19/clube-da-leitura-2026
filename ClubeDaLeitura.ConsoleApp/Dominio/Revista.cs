@@ -2,6 +2,7 @@ using System;
 using System.Data.Common;
 using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
 

@@ -1,20 +1,18 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Aprensacao;
 using ClubeDaLeitura.ConsoleApp.Dominio;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
+RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 
 Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
 repositorioCaixa.Cadastrar(caixa);
 
-Revista revista = new Revista("Naruto", 10, 2009, caixa);
-repositorioRevista.Cadastrar(revista);
-
-repositorioCaixa.Cadastrar(caixa);
-
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 TelaRevista telaRevista = new TelaRevista(repositorioCaixa, repositorioRevista);
+TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
 
 EntidadeBase entidade = caixa;
 
@@ -113,7 +111,35 @@ while (true)
 
         else if (opcaoMenuPrincipal == "3")
         {
+            opcaoMenuInterno = telaAmigo.ObterEscolhaMenuInterno();
 
+            if (opcaoMenuInterno == "S")
+            {
+                Console.Clear();
+                break;
+            }
+            if (opcaoMenuInterno == "1")
+            {
+                telaAmigo.Cadastrar();
+                break;
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaAmigo.Editar();
+                break;
+            }
+
+            else if (opcaoMenuInterno == "3")
+            {
+                telaAmigo.Excluir();
+                break;
+            }
+
+            else if (opcaoMenuInterno == "4")
+            {
+                telaAmigo.VisualizarTodos(deveExbirCabecalho: true);
+                break;
+            }
         }
 
         else if (opcaoMenuPrincipal == "4")
