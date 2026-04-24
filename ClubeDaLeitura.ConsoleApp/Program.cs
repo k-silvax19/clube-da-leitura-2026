@@ -6,17 +6,25 @@ using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-
-Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
-repositorioCaixa.Cadastrar(caixa);
+RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 TelaRevista telaRevista = new TelaRevista(repositorioCaixa, repositorioRevista);
 TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
 
-EntidadeBase entidade = caixa;
+TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
+Caixa caixa = new Caixa("Lançamentos Naruto", "Vermelho", 3);
+repositorioCaixa.Cadastrar(caixa);
 
-entidade.AtualizarRegistro(new Caixa("Teste", "Azul", 4));
+Revista revista = new Revista("Panini - Naruto", 38, 2010, caixa);
+repositorioRevista.Cadastrar(revista);
+
+Amigo amigo = new Amigo("Kauan S", "Dona Deise", "49 98887-9313");
+repositorioAmigo.Cadastrar(amigo);
+
+Emprestimo emprestimo = new Emprestimo(revista, amigo);
+emprestimo.Abrir();
+repositorioEmprestimo.Cadastrar(emprestimo);
 
 while (true)
 {
@@ -144,7 +152,28 @@ while (true)
 
         else if (opcaoMenuPrincipal == "4")
         {
+            opcaoMenuInterno = telaEmprestimo.ObterEscolhaMenuInterno();
 
+            if (opcaoMenuInterno == "S")
+            {
+                Console.Clear();
+                break;
+            }
+            if (opcaoMenuInterno == "1")
+            {
+                telaEmprestimo.Abrir();
+                break;
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaEmprestimo.Concluir();
+                break;
+            }
+            else if (opcaoMenuInterno == "3")
+            {
+                telaEmprestimo.VisualizarTodos(deveExbirCabecalho: true);
+                break;
+            }
         }
     }
 }

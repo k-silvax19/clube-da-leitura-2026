@@ -3,7 +3,6 @@ using System.Data.Common;
 using System.Diagnostics.Contracts;
 using System.Security.Cryptography;
 using ClubeDaLeitura.ConsoleApp.Dominio.Base;
-
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
 public class Revista : EntidadeBase
@@ -11,8 +10,9 @@ public class Revista : EntidadeBase
     public string Titulo { get; set; }
     public int NumeroEdicao { get; set; }
     public int AnoPublicacao { get; set; }
-
+    public int StatusRevista { get; set; }
     public Caixa Caixa { get; set; }
+    public StatusRevista Status {get; set; }
 
     public Revista(string titulo, int numeroEdicao, int anoPublicacao, Caixa caixa)
     {
@@ -64,5 +64,15 @@ public class Revista : EntidadeBase
         NumeroEdicao = revistaAtualizada.NumeroEdicao;
         AnoPublicacao = revistaAtualizada.AnoPublicacao;
         Caixa = revistaAtualizada.Caixa;
+    }
+
+    public void Emprestar()
+    {
+        Status = Dominio.StatusRevista.Emprestada;
+    }
+
+    public void Devolver()
+    {
+        Status = Dominio.StatusRevista.Disponivel;
     }
 }
