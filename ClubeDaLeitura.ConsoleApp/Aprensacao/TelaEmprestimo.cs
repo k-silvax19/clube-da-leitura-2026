@@ -1,18 +1,19 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
+using ClubeDaLeitura.ConsoleApp.Aprensacao.Base;
 using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Aprensacao;
 
-public class TelaEmprestimo
+public class TelaEmprestimo: ITela
 {
     private RepositorioEmprestimo repositorioEmprestimo;
     private RepositorioRevista repositorioRevista;
     private RepositorioAmigo repositorioAmigo;
 
-    public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioAmigo repositorioAmigo = null, RepositorioRevista repositorioRevista = null)
+    public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista1, RepositorioAmigo repositorioAmigo = null, RepositorioRevista repositorioRevista = null)
     {
         this.repositorioEmprestimo = repositorioEmprestimo;
         this.repositorioAmigo = repositorioAmigo;
