@@ -31,6 +31,7 @@ public class TelaPrincipal
 
         Emprestimo emprestimo = new Emprestimo(revista, amigo);
         emprestimo.Abrir();
+        emprestimo.Abertura = DateTime.Now.AddDays(-10);
         repositorioEmprestimo.Cadastrar(emprestimo);
     }
 
@@ -44,6 +45,7 @@ public class TelaPrincipal
         Console.WriteLine("2 - Gerenciar revistas");
         Console.WriteLine("3 - Gerenciar amigos");
         Console.WriteLine("4 - Gerenciar empréstimos");
+        Console.WriteLine("5 - Gerenciar Multas");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -60,6 +62,9 @@ public class TelaPrincipal
 
         if (opcaoMenuPrincipal == "4")
             return new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo);
+
+        if (opcaoMenuPrincipal == "5")
+            return new TelaMulta(repositorioEmprestimo, repositorioAmigo);
 
         return null;
     }

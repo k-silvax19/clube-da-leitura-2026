@@ -20,7 +20,7 @@ while (true)
         Console.Clear();
         break;
     }
-    
+
     while (true)
     {
         if (telaSelecionada is TelaBase)
@@ -82,6 +82,35 @@ while (true)
             else if (opcaoMenuInterno == "3")
             {
                 telaEmprestimo.VisualizarTodos(deveExbirCabecalho: true);
+                break;
+            }
+        }
+
+        else if (telaSelecionada is TelaMulta)
+        {
+            string? opcaoMenuInterno;
+            TelaMulta telaMulta = (TelaMulta)telaSelecionada;
+
+            opcaoMenuInterno = telaMulta.ObterEscolhaMenuInterno();
+
+            if (opcaoMenuInterno == "S")
+            {
+                Console.Clear();
+                break;
+            }
+            if (opcaoMenuInterno == "1")
+            {
+                telaMulta.VisualizarMultasEmAberto();
+                break;
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaMulta.QuitarMulta();
+                break;
+            }
+            else if (opcaoMenuInterno == "3")
+            {
+                telaMulta.VisualizarMultasDeAmigo();
                 break;
             }
         }

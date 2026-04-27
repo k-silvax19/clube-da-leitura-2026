@@ -7,13 +7,13 @@ using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Aprensacao;
 
-public class TelaEmprestimo: ITela
+public class TelaEmprestimo : ITela
 {
     private RepositorioEmprestimo repositorioEmprestimo;
     private RepositorioRevista repositorioRevista;
     private RepositorioAmigo repositorioAmigo;
-
-    public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista1, RepositorioAmigo repositorioAmigo = null, RepositorioRevista repositorioRevista = null)
+    
+    public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista, RepositorioAmigo repositorioAmigo)
     {
         this.repositorioEmprestimo = repositorioEmprestimo;
         this.repositorioAmigo = repositorioAmigo;
@@ -40,6 +40,24 @@ public class TelaEmprestimo: ITela
     public void Abrir()
     {
         Emprestimo emprestimo = ObterDadosCasdastrais();
+
+        if (emprestimo.Amigo.Emprestimos == null)
+            return;
+
+        for (int i = 0; i < emprestimo.Amigo.Emprestimos.Length; i++)
+        {
+            Emprestimo e = emprestimo.Amigo.Emprestimos[i];
+
+            if (e == null)
+                continue;
+
+            if (e.Multa != null && e.Multa.Status == StatusMulta.Pendente)
+            {
+                Console.WriteLine("Esse amigo tem uma multa pendente.");
+                Console.ReadLine();
+                return;
+            }
+        }
 
         string[] erros = emprestimo.Validar();
 
@@ -138,7 +156,7 @@ public class TelaEmprestimo: ITela
             if (e == null)
                 continue;
 
-
+            
             Console.Write("{0, -7} | ", e.Id);
             Console.Write("{0, -15} | ", e.Revista.Titulo);
             Console.Write("{0, -10} | ", e.Amigo.Nome);

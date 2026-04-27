@@ -43,7 +43,6 @@ public class Revista : EntidadeBase
 
         if (Caixa == null)
             erros += "O campo \"Caixa\" deve conter uma caixa válida;";
-
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
 

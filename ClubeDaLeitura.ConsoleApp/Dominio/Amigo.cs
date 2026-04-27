@@ -76,6 +76,7 @@ public class Amigo : EntidadeBase
 
             if (e == null)
                 Emprestimos[i] = emprestimo;
+                break;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
 public class Emprestimo
 {
+    public Multa Multa { get; set; }
     public string Id { get; set; } = string.Empty;
     public Revista Revista { get; set; }
     public Amigo Amigo { get; set; }
@@ -19,9 +20,10 @@ public class Emprestimo
             DateTime conclusao = Abertura.AddDays(diasDeEmprestimo);
 
             return conclusao;
+
         }
     }
-    public bool EstaAtrasado 
+    public bool EstaAtrasado
     {
         get
         {
@@ -69,5 +71,25 @@ public class Emprestimo
         Status = StatusEmprestimo.Concluido;
         Revista.Devolver();
     }
-}
 
+    public int CalcularDiasAtraso()
+    {
+        if (!EstaAtrasado)
+            return 0;
+
+        return (DateTime.Now - ConclusãoPrevista).Days;
+    }
+    
+    public void GerarMulta()
+    {
+        if (!EstaAtrasado)
+            return;
+
+        if (Multa != null)
+            return;
+
+        int dias = CalcularDiasAtraso();
+
+        Multa = new Multa(this, dias);
+    }
+}

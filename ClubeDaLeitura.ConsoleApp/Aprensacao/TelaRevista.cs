@@ -16,7 +16,6 @@ public class TelaRevista : TelaBase
         repositorioCaixa = rC;
     }
 
-
     public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
