@@ -1,10 +1,8 @@
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
-public partial class Reserva
+public enum StatusReserva
 {
-    public enum StatusReserva
-    {
-        Ativa,
-        Concluida
-    }
+    Ativa,
+    Concluida
 }
+
