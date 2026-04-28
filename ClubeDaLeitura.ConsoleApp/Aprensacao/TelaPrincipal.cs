@@ -11,16 +11,19 @@ public class TelaPrincipal
     private RepositorioRevista repositorioRevista;
     private RepositorioAmigo repositorioAmigo;
     private RepositorioEmprestimo repositorioEmprestimo;
+    RepositorioReserva repositorioReserva;
 
     public TelaPrincipal(RepositorioEmprestimo repositorioEmprestimo,
     RepositorioCaixa repositorioCaixa,
     RepositorioRevista repositorioRevista,
-    RepositorioAmigo repositorioAmigo)
+    RepositorioAmigo repositorioAmigo,
+    RepositorioReserva repositorioReserva)
     {
         this.repositorioEmprestimo = repositorioEmprestimo;
         this.repositorioCaixa = repositorioCaixa;
         this.repositorioRevista = repositorioRevista;
         this.repositorioAmigo = repositorioAmigo;
+        this.repositorioReserva = repositorioReserva;
 
         Caixa caixa = new Caixa("Lançamentos Naruto", "Vermelho", 3);
         repositorioCaixa.Cadastrar(caixa);
@@ -46,6 +49,7 @@ public class TelaPrincipal
         Console.WriteLine("3 - Gerenciar amigos");
         Console.WriteLine("4 - Gerenciar empréstimos");
         Console.WriteLine("5 - Gerenciar Multas");
+        Console.WriteLine("6 - Gerenciar Reservas");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -65,6 +69,9 @@ public class TelaPrincipal
 
         if (opcaoMenuPrincipal == "5")
             return new TelaMulta(repositorioEmprestimo, repositorioAmigo);
+
+        if (opcaoMenuPrincipal == "6")
+            return new TelaReserva(repositorioReserva , repositorioAmigo, repositorioRevista);
 
         return null;
     }

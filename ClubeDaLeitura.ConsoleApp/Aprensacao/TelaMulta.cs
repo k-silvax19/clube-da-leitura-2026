@@ -57,13 +57,22 @@ public class TelaMulta : ITela
             if (e.Multa == null || e.Multa.Status == StatusMulta.Quitada)
                 continue;
 
-            Console.WriteLine(
-                "{0, -7} | {1, -15} | {2, -10} | {3, -10}",
-                e.Id,
-                e.Amigo.Nome,
-                $"R$ {e.Multa.Valor}",
-                e.Multa.Status
-            );
+
+            Console.Write("{0, -7} | ", e.Id);
+            Console.Write("{0, -10} | ", $"R$ {e.Multa.Valor}");
+
+            if (e.Multa.Status == StatusMulta.Pendente)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (e.Multa.Status == StatusMulta.Quitada)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+
+            Console.Write("{0, -10}", e.Multa.Status);
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         Console.WriteLine("===============================");
@@ -136,7 +145,7 @@ public class TelaMulta : ITela
             emprestimoSelecionado.Amigo.Nome,
             $"R$ {emprestimoSelecionado.Multa.Valor}",
             emprestimoSelecionado.Multa.Status
-            
+
         );
 
         Console.WriteLine("===============================");
@@ -207,13 +216,21 @@ public class TelaMulta : ITela
 
             if (e.Multa == null)
                 continue;
+            Console.Write("{0, -7} | ", e.Id);
+            Console.Write("{0, -10} | ", $"R$ {e.Multa.Valor}");
 
-            Console.WriteLine(
-                "{0, -7} | {1, -10} | {2, -10}",
-                e.Id,
-                $"R$ {e.Multa.Valor}",
-                e.Multa.Status
-            );
+            if (e.Multa.Status == StatusMulta.Pendente)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (e.Multa.Status == StatusMulta.Quitada)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+
+            Console.Write("{0, -10}", e.Multa.Status);
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         Console.WriteLine("===============================");

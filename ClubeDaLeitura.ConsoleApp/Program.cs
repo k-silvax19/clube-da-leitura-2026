@@ -8,8 +8,9 @@ RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
+RepositorioReserva repositorioReserva = new RepositorioReserva();
 
-TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioEmprestimo, repositorioCaixa, repositorioRevista, repositorioAmigo);
+TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioEmprestimo, repositorioCaixa, repositorioRevista, repositorioAmigo, repositorioReserva);
 
 while (true)
 {
@@ -85,7 +86,6 @@ while (true)
                 break;
             }
         }
-
         else if (telaSelecionada is TelaMulta)
         {
             string? opcaoMenuInterno;
@@ -111,6 +111,34 @@ while (true)
             else if (opcaoMenuInterno == "3")
             {
                 telaMulta.VisualizarMultasDeAmigo();
+                break;
+            }
+        }
+        else if (telaSelecionada is TelaReserva)
+        {
+            string? opcaoMenuInterno;
+            TelaReserva telaReserva = (TelaReserva)telaSelecionada;
+
+            opcaoMenuInterno = telaReserva.ObterEscolhaMenuInterno();
+
+            if (opcaoMenuInterno == "S")
+            {
+                Console.Clear();
+                break;
+            }
+            if (opcaoMenuInterno == "1")
+            {
+                telaReserva.CriarReserva();
+                break;
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaReserva.CancelarReserva();
+                break;
+            }
+            else if (opcaoMenuInterno == "3")
+            {
+                telaReserva.VisualizarReservas(cabecalho: true);
                 break;
             }
         }
